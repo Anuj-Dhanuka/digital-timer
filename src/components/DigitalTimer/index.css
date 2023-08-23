@@ -1,0 +1,130 @@
+/* Write your CSS here */
+.digital-timer-bg-container {
+  background-image: linear-gradient(to right, #defafe, #cffcf1);
+  box-shadow: 0px 4px 16px 0px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.digital-timer-main-heading {
+  font-family: Roboto;
+  font-size: 32px;
+}
+
+.digital-timer-content-container {
+  display: flex;
+  align-items: center;
+}
+
+.timer-bg-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  background-size: cover;
+  height: 520px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-inner-container {
+  background-color: #ffffff;
+  height: 170px;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 150px;
+}
+
+.running-timer {
+  color: #00d9f5;
+  font-family: Roboto;
+  margin-bottom: 0px;
+}
+
+.running-time-pause {
+  font-family: Roboto;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.digital-timer-content-inner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play-reset-container {
+  display: flex;
+}
+
+.pause-play-btn-container {
+  display: flex;
+  margin-right: 26px;
+}
+
+.play-pause-button {
+  background-color: transparent;
+  border-width: 0px;
+}
+
+.play-pause-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.play-pause-text {
+  font-family: Roboto;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.label-text {
+  font-family: Roboto;
+  font-weight: 600;
+  font-size: 12px;
+  margin-top: 26px;
+  margin-bottom: 12px;
+}
+
+.minus-plus-container {
+  display: flex;
+}
+
+.minus-button {
+  background-color: transparent;
+  border-width: 0px;
+  font-family: Roboto;
+  font-size: 36px;
+  margin-right: 12px;
+}
+
+.time-setter-bg-container {
+  background-image: linear-gradient(to right, #00d9f5, #cffcf1);
+  height: 35px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.time-setter-time {
+  font-family: Roboto;
+  font-size: 22px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.plus-button {
+  background-color: transparent;
+  border-width: 0px;
+  font-family: Roboto;
+  font-size: 22px;
+  margin-left: 12px;
+}
