@@ -42,12 +42,33 @@ class DigitalTimer extends Component {
   }
 
   clickingPlayPause = () => {
+    const {isPause} = this.state
+
+    if (isPause === true) {
+      clearInterval(this.intervalId)
+    } else {
+      this.intervalId = setInterval(this.timeDecrement, 1000)
+    }
     this.setState(prevState => ({
       isPause: !prevState.isPause,
     }))
-    const {isPause} = this.state
+
     if (isPause === true) {
       this.setState({isReset: false})
+    }
+  }
+
+  timeDecrement = () => {
+    const {counterSeconds} = this.state
+    if (counterSeconds === 0) {
+      this.setState(prevState => ({
+        counterMinutes: prevState.counterMinutes - 1,
+        counterSeconds: 60,
+      }))
+    } else {
+      this.setState(prevState => ({
+        counterSeconds: prevState.counterSeconds - 1,
+      }))
     }
   }
 
