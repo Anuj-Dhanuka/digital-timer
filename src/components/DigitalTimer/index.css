@@ -71,11 +71,14 @@
 .play-pause-button {
   background-color: transparent;
   border-width: 0px;
+  display: flex;
+  align-items: center;
 }
 
 .play-pause-icon {
   height: 30px;
   width: 30px;
+  margin-right: 10px;
 }
 
 .play-pause-text {
@@ -119,6 +122,7 @@
   font-size: 22px;
   margin-left: 12px;
   margin-right: 12px;
+  font-weight: 600;
 }
 
 .plus-button {
