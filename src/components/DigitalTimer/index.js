@@ -3,7 +3,13 @@ import {Component} from 'react'
 import './index.css'
 
 class DigitalTimer extends Component {
-  state = {isPause: true, count: 0, counterCount: 25}
+  state = {
+    isPause: true,
+    count: 25,
+    counterMinutes: 25,
+    counterSeconds: 0,
+    isReset: false,
+  }
 
   gettingPausePlayButton = () => {
     const {isPause} = this.state
@@ -25,33 +31,64 @@ class DigitalTimer extends Component {
     )
   }
 
+  onClickResetButton = () => {
+    const {count} = this.state
+    this.setState({
+      isReset: true,
+      counterMinutes: count,
+      counterSeconds: 0,
+      isPause: true,
+    })
+  }
+
   clickingPlayPause = () => {
     this.setState(prevState => ({
       isPause: !prevState.isPause,
     }))
+    const {isPause} = this.state
+    if (isPause === true) {
+      this.setState({isReset: false})
+    }
   }
 
   onClickingPositive = () => {
+    const {isReset} = this.state
     this.setState(prevState => ({
       count: prevState.count + 1,
     }))
+    if (isReset === true) {
+      this.setState(prevState => ({
+        counterMinutes: prevState.count,
+        counterSeconds: 0,
+      }))
+    }
   }
 
   onClickingNegative = () => {
+    const {isReset} = this.state
     this.setState(prevState => ({
       count: prevState.count - 1,
     }))
+    if (isReset === true) {
+      this.setState(prevState => ({
+        counterMinutes: prevState.count,
+        counterSeconds: 0,
+      }))
+    }
   }
 
   render() {
-    const {isPause, count, counterCount} = this.state
+    const {isPause, count, counterMinutes, counterSeconds} = this.state
     return (
       <div className="digital-timer-bg-container">
         <h1 className="digital-timer-main-heading">Digital Timer</h1>
         <div className="digital-timer-content-container">
           <div className="timer-bg-container">
             <div className="timer-inner-container">
-              <h1 className="running-timer">{counterCount}</h1>
+              <h1 className="running-timer">
+                {counterMinutes > 9 ? counterMinutes : `0${counterMinutes}`}:
+                {counterSeconds > 9 ? counterSeconds : `0${counterSeconds}`}
+              </h1>
               <p className="running-time-pause">
                 {isPause ? 'Paused' : 'Running'}
               </p>
@@ -61,17 +98,21 @@ class DigitalTimer extends Component {
             <div className="play-reset-container">
               <div className="pause-play-btn-container">
                 <button
-                  className="play-pause-button"
+                  className="play-pause-button play-pause-text"
                   type="button"
                   onClick={this.clickingPlayPause}
                 >
                   {this.gettingPausePlayButton()}
+                  {isPause ? 'Start' : 'Pause'}
                 </button>
-                <p className="play-pause-text">{isPause ? 'Start' : 'Pause'}</p>
               </div>
 
               <div className="pause-play-btn-container">
-                <button className="play-pause-button" type="button">
+                <button
+                  className="play-pause-button"
+                  type="button"
+                  onClick={this.onClickResetButton}
+                >
                   <img
                     src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png "
                     alt="reset icon"
@@ -81,9 +122,9 @@ class DigitalTimer extends Component {
                 <p className="play-pause-text">Reset</p>
               </div>
             </div>
-            <label className="label-text" htmlFor="myElement">
+            <p className="label-text" htmlFor="myElement">
               Set Timer Limit
-            </label>
+            </p>
             <div id="myElement" className="minus-plus-container">
               <button
                 type="button"
@@ -93,7 +134,7 @@ class DigitalTimer extends Component {
                 -
               </button>
               <div className="time-setter-bg-container">
-                <h1 className="time-setter-time">{count}</h1>
+                <p className="time-setter-time">{count}</p>
               </div>
               <button
                 type="button"
