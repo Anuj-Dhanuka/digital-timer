@@ -8,7 +8,11 @@ class DigitalTimer extends Component {
     count: 25,
     counterMinutes: 25,
     counterSeconds: 0,
-    isReset: false,
+    isReset: true,
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(this.tick, 1000)
   }
 
   gettingPausePlayButton = () => {
@@ -31,6 +35,22 @@ class DigitalTimer extends Component {
     )
   }
 
+  tick = () => {
+    const {counterSeconds, isPause} = this.state
+    if (isPause === false) {
+      if (counterSeconds === 0) {
+        this.setState(prevState => ({
+          counterMinutes: prevState.counterMinutes - 1,
+          counterSeconds: 59,
+        }))
+      } else {
+        this.setState(prevState => ({
+          counterSeconds: prevState.counterSeconds - 1,
+        }))
+      }
+    }
+  }
+
   onClickResetButton = () => {
     const {count} = this.state
     this.setState({
@@ -46,8 +66,6 @@ class DigitalTimer extends Component {
 
     if (isPause === true) {
       clearInterval(this.intervalId)
-    } else {
-      this.intervalId = setInterval(this.timeDecrement, 1000)
     }
     this.setState(prevState => ({
       isPause: !prevState.isPause,
@@ -60,6 +78,7 @@ class DigitalTimer extends Component {
 
   timeDecrement = () => {
     const {counterSeconds} = this.state
+
     if (counterSeconds === 0) {
       this.setState(prevState => ({
         counterMinutes: prevState.counterMinutes - 1,
@@ -73,28 +92,32 @@ class DigitalTimer extends Component {
   }
 
   onClickingPositive = () => {
-    const {isReset} = this.state
-    this.setState(prevState => ({
-      count: prevState.count + 1,
-    }))
-    if (isReset === true) {
+    const {isReset, isPause} = this.state
+    if (isPause === true) {
       this.setState(prevState => ({
-        counterMinutes: prevState.count,
-        counterSeconds: 0,
+        count: prevState.count + 1,
       }))
+      if (isReset === true) {
+        this.setState(prevState => ({
+          counterMinutes: prevState.count,
+          counterSeconds: 0,
+        }))
+      }
     }
   }
 
   onClickingNegative = () => {
-    const {isReset} = this.state
-    this.setState(prevState => ({
-      count: prevState.count - 1,
-    }))
-    if (isReset === true) {
+    const {isReset, isPause} = this.state
+    if (isPause === true) {
       this.setState(prevState => ({
-        counterMinutes: prevState.count,
-        counterSeconds: 0,
+        count: prevState.count - 1,
       }))
+      if (isReset === true) {
+        this.setState(prevState => ({
+          counterMinutes: prevState.count,
+          counterSeconds: 0,
+        }))
+      }
     }
   }
 
